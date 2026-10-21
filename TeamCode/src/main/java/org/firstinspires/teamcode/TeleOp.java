@@ -59,64 +59,108 @@ public class TeleOp extends OpMode {
             motor_runa=false;
             left_x=0.0;
             left_y=0.0;
+            right_x=0.0;
+            right_y=0.0;
         }
         if (reflect==true){
             bench.setMotorSpeed(-1.0);
             telemetry.addData("Motor Revs",bench.getMotorRevs());
         }
         if (left_y==0&&left_x==0){
-            bench.setWheelSpeed(0.0);
-            bench.setTrunSpeed(0.0);
+            bench.setFrontleftmotor(0.0);
+            bench.setFrontrightmotor(0.0);
+            bench.setBackleftmotor(0.0);
+            bench.setBackrightmotor(0.0);
         }
         else if (Math.abs(left_x)>Math.abs(left_y)){
             if (left_x>0){
-                bench.setTrunSpeed(-left_x);
+                bench.setFrontleftmotor(-left_x);
+                bench.setFrontrightmotor(-left_x);
+                bench.setBackleftmotor(-left_x);
+                bench.setBackrightmotor(-left_x);
             }else{
-                bench.setTrunSpeed(-left_x);
+                bench.setFrontleftmotor(left_x);
+                bench.setFrontrightmotor(left_x);
+                bench.setBackleftmotor(left_x);
+                bench.setBackrightmotor(left_x);
             }
         }
         else if(left_x==0) {
             if (left_y < 0) {
-                bench.setWheelSpeed(left_y);
+                bench.setFrontleftmotor(-left_x);
+                bench.setFrontrightmotor(left_x);
+                bench.setBackleftmotor(-left_x);
+                bench.setBackrightmotor(left_x);
 
             }
             else if(left_y>0){
-                bench.setWheelSpeed(left_y);
+                bench.setFrontleftmotor(left_x);
+                bench.setFrontrightmotor(-left_x);
+                bench.setBackleftmotor(left_x);
+                bench.setBackrightmotor(-left_x);
             }
         }
         else if(left_y==0){
             if(left_x<0){
-                bench.setTrunSpeed(-left_x);
+                bench.setFrontleftmotor(left_x);
+                bench.setFrontrightmotor(left_x);
+                bench.setBackleftmotor(left_x);
+                bench.setBackrightmotor(left_x);
             }
             else if(left_x>0){
-                bench.setTrunSpeed(-left_x);
+                bench.setFrontleftmotor(-left_x);
+                bench.setFrontrightmotor(-left_x);
+                bench.setBackleftmotor(-left_x);
+                bench.setBackrightmotor(-left_x);
             }
         }
-        else{
+        else if(left_x==0){
             if (left_y<0){
-                bench.setWheelSpeed(left_y);
+                bench.setFrontleftmotor(-left_x);
+                bench.setFrontrightmotor(left_x);
+                bench.setBackleftmotor(-left_x);
+                bench.setBackrightmotor(left_x);
             }else{
-                bench.setWheelSpeed(left_y);
+                bench.setFrontleftmotor(left_x);
+                bench.setFrontrightmotor(-left_x);
+                bench.setBackleftmotor(left_x);
+                bench.setBackrightmotor(-left_x);
             }
         }
         if (right_x>0 ){
-            if (right_y<value_1){
+            if (right_y<=value_1){
+                bench.setFrontleftmotor(-right_x);
+                bench.setBackrightmotor(right_x);
                 //right forward
             }
-            else if(value_1<right_y&&right_y<value_2){
+            else if(value_1<right_y&&right_y<=value_2){
+                bench.setFrontleftmotor(-right_x);
+                bench.setFrontrightmotor(-right_x);
+                bench.setBackleftmotor(right_x);
+                bench.setBackrightmotor(right_x);
                 //right
             }else{
+                bench.setFrontrightmotor(-right_x);
+                bench.setBackleftmotor(right_x);
                 //right back
             }
         }
         else if (right_x<0){
-            if (right_y<value_2){
+            if (right_y<=value_2){
+                bench.setFrontrightmotor(right_x);
+                bench.setBackleftmotor(-right_x);
                 //left forward
             }
-            else if (right_y>value_2&&right_y<value_1){
+            else if (right_y>value_2&&right_y<=value_1){
+                bench.setFrontleftmotor(right_x);
+                bench.setFrontrightmotor(right_x);
+                bench.setBackleftmotor(-right_x);
+                bench.setBackrightmotor(-right_x);
                 //left
             }
             else{
+                bench.setFrontleftmotor(right_x);
+                bench.setBackrightmotor(-right_x);
                 //leftback
             }
         }

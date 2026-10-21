@@ -46,4 +46,16 @@ public class MotorSetting {
         }
         return motor.getCurrentPosition()/ ticksPerRev;
     }
+    public void setFrontleftmotor(double speed){
+        frontleftmotor.setPower(speed);
+    }
+    public void setFrontrightmotor(double speed){
+        frontrightmotor.setPower(speed);
+    }
+    public void setBackleftmotor(double speed){
+        backleftmotor.setPower(speed);
+    }
+    public void setBackrightmotor(double speed){
+        backrightmotor.setPower(speed);
+    }
 }
