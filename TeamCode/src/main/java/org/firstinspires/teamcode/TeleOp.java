@@ -27,6 +27,8 @@ public class TeleOp extends OpMode {
         telemetry.addData("x",gamepad1.left_stick_x);
         telemetry.addData("right x",gamepad1.right_stick_x);
         telemetry.addData("right y",gamepad1.right_stick_y);
+        telemetry.addData("术式顺转：苍" + "术式反转：赫");
+        telemetry.addData("虚式。茈")
 
         boolean motor_runa=gamepad1.a;
         boolean reflect=gamepad1.b;
@@ -57,112 +59,80 @@ public class TeleOp extends OpMode {
             numa=1;
             lasta=false;
             motor_runa=false;
-            left_x=0.0;
-            left_y=0.0;
-            right_x=0.0;
-            right_y=0.0;
+            bench.setDrive(0.0,0.0,0.0,0.0);
         }
         if (reflect==true){
             bench.setMotorSpeed(-1.0);
             telemetry.addData("Motor Revs",bench.getMotorRevs());
         }
         if (left_y==0&&left_x==0){
-            bench.setFrontleftmotor(0.0);
-            bench.setFrontrightmotor(0.0);
-            bench.setBackleftmotor(0.0);
-            bench.setBackrightmotor(0.0);
+            bench.setDrive(0.0,0.0,0.0,0.0);
         }
         else if (Math.abs(left_x)>Math.abs(left_y)){
             if (left_x>0){
-                bench.setFrontleftmotor(-left_x);
-                bench.setFrontrightmotor(-left_x);
-                bench.setBackleftmotor(-left_x);
-                bench.setBackrightmotor(-left_x);
+                bench.setDrive(-left_x,-left_x,-left_x,-left_x);
             }else{
-                bench.setFrontleftmotor(-left_x);
-                bench.setFrontrightmotor(-left_x);
-                bench.setBackleftmotor(-left_x);
-                bench.setBackrightmotor(-left_x);
+                bench.setDrive(-left_x,-left_x,-left_x,-left_x);
             }
         }
         else if(left_x==0) {
             if (left_y < 0) {
-                bench.setFrontleftmotor(left_y);
-                bench.setFrontrightmotor(-left_y);
-                bench.setBackleftmotor(left_y);
-                bench.setBackrightmotor(-left_y);
+
+                bench.setDrive(left_y,-left_y,left_y,-left_y);
 
             }
             else if(left_y>0){
-                bench.setFrontleftmotor(left_y);
-                bench.setFrontrightmotor(-left_y);
-                bench.setBackleftmotor(left_y);
-                bench.setBackrightmotor(-left_y);
+                bench.setDrive(left_y,-left_y,left_y,-left_y);
+
             }
         }
         else if(left_y==0){
             if(left_x<0){
-                bench.setFrontleftmotor(left_x);
-                bench.setFrontrightmotor(left_x);
-                bench.setBackleftmotor(left_x);
-                bench.setBackrightmotor(left_x);
+                bench.setDrive(left_x,left_x,left_x,left_x);
             }
             else if(left_x>0){
-                bench.setFrontleftmotor(-left_x);
-                bench.setFrontrightmotor(-left_x);
-                bench.setBackleftmotor(-left_x);
-                bench.setBackrightmotor(-left_x);
+                bench.setDrive(-left_x,-left_x,-left_x,-left_x);
             }
         }
         else{
             if (left_y<0){
-                bench.setFrontleftmotor(left_y);
-                bench.setFrontrightmotor(-left_y);
-                bench.setBackleftmotor(left_y);
-                bench.setBackrightmotor(-left_y);
+                bench.setDrive(left_y,-left_y,left_y,-left_y);
             }else{
-                bench.setFrontleftmotor(left_y);
-                bench.setFrontrightmotor(-left_y);
-                bench.setBackleftmotor(left_y);
-                bench.setBackrightmotor(-left_y);
+                bench.setDrive(left_y,-left_y,left_y,-left_y);
             }
         }
 
         if (right_x>0 ){
             if (right_y<=value_1){
-                bench.setFrontleftmotor(-right_x);
-                bench.setBackrightmotor(right_x);
+
                 //right forward
+                bench.setDrive(-right_x,0.0,0.0,right_x);
             }
             else if(value_1<right_y&&right_y<=value_2){
-                bench.setFrontleftmotor(-right_x);
-                bench.setFrontrightmotor(-right_x);
-                bench.setBackleftmotor(right_x);
-                bench.setBackrightmotor(right_x);
+
                 //right
+                bench.setDrive(-right_x,-right_x,right_x,right_x);
             }else{
-                bench.setFrontrightmotor(-right_x);
-                bench.setBackleftmotor(right_x);
+
                 //right back
+                bench.setDrive(0.0,-right_x,right_x,0.0);
             }
         }
         else if (right_x<0){
             if (right_y<=value_2){
-                bench.setFrontrightmotor(right_x);
-                bench.setBackleftmotor(-right_x);
+
                 //left forward
+                bench.setDrive(0.0,right_x,-right_x,0.0);
             }
             else if (right_y>value_2&&right_y<=value_1){
-                bench.setFrontleftmotor(right_x);
-                bench.setFrontrightmotor(right_x);
-                bench.setBackleftmotor(-right_x);
-                bench.setBackrightmotor(-right_x);
+
                 //left
+                bench.setDrive(right_x,right_x,-right_x,-right_x);
             }
             else{
-                bench.setFrontleftmotor(right_x);
-                bench.setBackrightmotor(-right_x);
-                //leftback
+
+                //left back
+                bench.setDrive(right_x,0.0,0.0,-right_x);
             }
         }
 
@@ -172,7 +142,6 @@ public class TeleOp extends OpMode {
 }
 //10.9 improve
 //10.13 improve
-//10.14 improve
 //10.15
 //10.19IMPROVE
 //10.21 improve

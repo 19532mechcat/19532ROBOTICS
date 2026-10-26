@@ -20,21 +20,21 @@ public class MotorSetting {
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontleftmotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontrightmotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backleftmotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backrightmotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backleftmotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backrightmotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         ticksPerRev = motor.getMotorType().getTicksPerRev();
         ticksPerRev2 = frontleftmotor.getMotorType().getTicksPerRev();
     }
     public void setMotorSpeed(double speed){
         motor.setPower(speed);
     }
-    public void setWheelSpeed(double speed){
-        frontleftmotor.setPower(speed);
-        frontrightmotor.setPower(-speed);
-        backrightmotor.setPower(-speed);
-        backleftmotor.setPower(speed);
+    public void setDrive(double lf,double rf,double lb,double rb){//现用
+        frontleftmotor.setPower(lf);
+        frontrightmotor.setPower(rf);
+        backrightmotor.setPower(rb);
+        backleftmotor.setPower(lb);
     }
-    public void setTrunSpeed(double speed){
+    public void setTrunSpeed(double speed){//旧函数
         frontleftmotor.setPower(speed);
         frontrightmotor.setPower(speed);
         backleftmotor.setPower(speed);
@@ -46,9 +46,7 @@ public class MotorSetting {
         }
         return motor.getCurrentPosition()/ ticksPerRev;
     }
-    public void setFrontleftmotor(double speed){
-        frontleftmotor.setPower(speed);
-    }
+    public void setFrontleftmotor(double speed){frontleftmotor.setPower(speed);}
     public void setFrontrightmotor(double speed){
         frontrightmotor.setPower(speed);
     }
