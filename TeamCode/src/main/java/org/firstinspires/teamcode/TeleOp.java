@@ -17,6 +17,7 @@ public class TeleOp extends OpMode {
 
 
     private static boolean lasta=false;
+    private static double speed;
 
 
     public void loop(){
@@ -27,18 +28,25 @@ public class TeleOp extends OpMode {
         telemetry.addData("x",gamepad1.left_stick_x);
         telemetry.addData("right x",gamepad1.right_stick_x);
         telemetry.addData("right y",gamepad1.right_stick_y);
-        telemetry.addData("术式顺转：苍" + "术式反转：赫");
-        telemetry.addData("虚式。茈")
+        telemetry.addData("cover angle",speed);
+
 
         boolean motor_runa=gamepad1.a;
         boolean reflect=gamepad1.b;
         boolean stop=gamepad1.x;
+        float cover=gamepad1.right_trigger;
         double left_y=gamepad1.left_stick_y;
         double left_x= gamepad1.left_stick_x;
         double right_x= gamepad1.right_stick_x;
         double right_y= gamepad1.right_stick_y;
         double value_1 =-Math.sqrt(3)*right_x/3;
         double value_2=Math.sqrt(3)*right_x/3;
+        if (cover<0.05){
+            cover=0;
+        }
+        else {
+            bench.setcover(0.2+(0.5*cover));
+        }
 
 
         if (motor_runa&&!lasta){
@@ -55,13 +63,13 @@ public class TeleOp extends OpMode {
             telemetry.addData("Motor Revs",bench.getMotorRevs());
         }
         //a button
-        if (stop==true){
+        if (stop){
             numa=1;
             lasta=false;
             motor_runa=false;
             bench.setDrive(0.0,0.0,0.0,0.0);
         }
-        if (reflect==true){
+        if (reflect){
             bench.setMotorSpeed(-1.0);
             telemetry.addData("Motor Revs",bench.getMotorRevs());
         }

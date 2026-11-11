@@ -2,6 +2,7 @@ package org.firstinspires.teamcode.mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class MotorSetting {
     private DcMotor motor;
@@ -11,6 +12,7 @@ public class MotorSetting {
     private DcMotor backrightmotor;
     private double ticksPerRev;
     private double ticksPerRev2;
+    private Servo servo;
     public void init(HardwareMap hwMap){
         motor =hwMap.get(DcMotor.class, "motor");
         frontleftmotor =hwMap.get(DcMotor.class, "FrontLeftMotor");
@@ -24,6 +26,7 @@ public class MotorSetting {
         backrightmotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         ticksPerRev = motor.getMotorType().getTicksPerRev();
         ticksPerRev2 = frontleftmotor.getMotorType().getTicksPerRev();
+        servo =hwMap.get(Servo.class,"cover");
     }
     public void setMotorSpeed(double speed){
         motor.setPower(speed);
@@ -56,4 +59,5 @@ public class MotorSetting {
     public void setBackrightmotor(double speed){
         backrightmotor.setPower(speed);
     }
+    public void setcover(double angle){servo.setPosition(angle);}
 }
