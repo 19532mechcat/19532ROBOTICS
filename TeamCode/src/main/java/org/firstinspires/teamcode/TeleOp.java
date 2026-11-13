@@ -18,11 +18,13 @@ public class TeleOp extends OpMode {
     }
 
     private static int numa=1;
+    private static int numb=1;
 
 
 
 
     private static boolean lasta=false;
+    private static boolean lastb=false;
 
 
 
@@ -61,11 +63,23 @@ public class TeleOp extends OpMode {
             bench.setMotorSpeed(0.0);//.\gradlew installDebug
             telemetry.addData("Motor Revs",bench.getMotorRevs());
         }
+        if (intake && !lastb){
+            numb+=1;
+        }
+        lasta=intake;
+        if (numb%2==0){
+            bench.setIntake(-0.8);
+        }else{
+            bench.setIntake(0.0);
+        }
         //a button
         if (stop){
             numa=1;
             lasta=false;
             motor_runa=false;
+            numb=1;
+            lastb=false;
+            intake=false;
             bench.setDrive(0.0,0.0,0.0,0.0);
         }
         if (intake){
